@@ -23,6 +23,10 @@ public class Jugador {
         propiedades = new ArrayList();
     }
     
+    public String getNombre(){
+        return nombre;
+    }
+    
     // Añadido el método para propiedadesHipotecadasJugador
     public ArrayList<TituloPropiedad> getPropiedades(){
         return propiedades;
@@ -64,7 +68,22 @@ public class Jugador {
         return tienePropietario;    
     }
     
-    //boolean comprarTitulo(){}
+    boolean comprarTitulo(){
+        boolean puedoComprar = false;
+        if (casillaActual.soyEdificable()){
+          boolean tengoPropietario = casillaActual.tengoPropietario();
+          if (!tengoPropietario){
+              int costeCompra = casillaActual.getCoste();
+              if (costeCompra <= saldo){
+                  TituloPropiedad titulo = casillaActual.asignarPropietario(this);
+                  propiedades.add(titulo);
+                  this.modificarSaldo(-costeCompra);
+                  puedoComprar = true;
+              }
+          }
+        }
+        return puedoComprar;
+    }
     
     Sorpresa devolverCartaLibertad(){
         Sorpresa carta = cartaLibertad;
@@ -72,7 +91,10 @@ public class Jugador {
         return carta;
     }
     
-    void irACarcel(Casilla casilla){}
+    void irACarcel(Casilla casilla){
+        setCasillaActual(casilla);
+        setEncarcelado(true);
+    }
     
     void modificarSaldo(int cantidad){
         saldo += cantidad;
@@ -98,20 +120,53 @@ public class Jugador {
         return titulos;
     }
     
-    void pagarCobrarPorCasaYHotel(int cantidad){}
+    void pagarCobrarPorCasaYHotel(int cantidad){
+        int numeroTotal = cuantasCasasHotelesTengo();
+        modificarSaldo (numeroTotal*cantidad);
+    }
     
-    //boolean pagarLibertad(int cantidad = PRECIO_LIBERTAD){}
+    boolean pagarLibertad(int cantidad){
+        boolean tengoSaldo = tengoSaldo(cantidad);
+        if (tengoSaldo){
+            modificarSaldo(cantidad);
+        }
+        return tengoSaldo;
+    }
     
-    //boolean puedoEdificarCasa(Casilla casilla){}
+    boolean puedoEdificarCasa(Casilla casilla){
+        boolean esMia = esDeMiPropiedad(casilla);
+        boolean tengoSaldo = false;
+        if(esMia){
+            int costeEdificarCasa = casilla.getPrecioEdificar();
+            tengoSaldo = tengoSaldo(costeEdificarCasa);
+        }
+        return esMia && tengoSaldo;
+    }
     
-    //boolean puedoEdificarHotel(Casilla casilla){}
+    boolean puedoEdificarHotel(Casilla casilla){
+        boolean esMia = esDeMiPropiedad(casilla);
+        boolean tengoSaldo = false;
+        if(esMia){
+            int costeEdificarHotel = casilla.getPrecioEdificar();
+            tengoSaldo = tengoSaldo(costeEdificarHotel);
+        }
+        return esMia && tengoSaldo;
+    }
     
-    //boolean puedoHipotecar(Casilla casilla){}
+    boolean puedoHipotecar(Casilla casilla){
+        boolean esMia = esDeMiPropiedad(casilla);
+        return esMia;
+    }
     
-    //boolean puedoPagarHipoteca(Casilla casilla){}
+    boolean puedoPagarHipoteca(Casilla casilla){
+        boolean puedoPagar = tengoSaldo(casilla.getCosteHipoteca());
+        return puedoPagar;
+    }
     
     boolean puedoVenderPropiedad(Casilla casilla){
-        return esDeMiPropiedad(casilla) && !casilla.getTitulo().getHipotecada();
+        boolean esMia = esDeMiPropiedad(casilla);
+        boolean hipotecada = casilla.estaHipotecada();
+        return esMia && !hipotecada;
     }
     
     void setCartaLibertad(Sorpresa carta){
@@ -133,7 +188,11 @@ public class Jugador {
         return tengo;
     }
     
-    void venderPropiedad(Casilla casilla){}
+    void venderPropiedad(Casilla casilla){
+        int precioVenta = casilla.venderTitulo();
+        modificarSaldo(precioVenta);
+        eliminarDeMisPropiedades(casilla);
+    }
     
     private int cuantasCasasHotelesTengo(){
         int total= 0;

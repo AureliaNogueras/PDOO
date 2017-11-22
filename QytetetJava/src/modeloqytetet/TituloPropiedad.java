@@ -26,7 +26,7 @@ public class TituloPropiedad {
     }
     
     void cobrarAlquiler(int coste){
-        propietario.modificarSaldo(coste);
+        propietario.modificarSaldo(-coste);
     }
     
     // Añadido para propiedadesHipotecadasJugador

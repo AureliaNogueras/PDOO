@@ -40,31 +40,56 @@ public class Casilla {
         return titulo;
     }
     
-    //TituloPropiedad asignarPropietario(Jugador jugador){}
+    TituloPropiedad asignarPropietario(Jugador jugador){
+        titulo.setPropietario(jugador);
+        return titulo;
+    }
     
-    //int calcularValorHipoteca(){}
+    int calcularValorHipoteca(){
+        int hipotecaBase = titulo.getHipotecaBase();
+        int cantidadRecibida = hipotecaBase + (int) (numCasas*0.5*hipotecaBase + numHoteles*hipotecaBase);
+        return cantidadRecibida;
+    }
     
-    //int cancelarHipoteca(){}
+    // Devuelve el precio que hay que pagar para deshipotecar la propiedad
+    int cancelarHipoteca(){
+        titulo.setHipotecada(false);
+        int valor = calcularValorHipoteca() + (int) (0.1*calcularValorHipoteca());
+        return valor;
+    }
     
     int cobrarAlquiler(){
         int costeAlquilerBase = titulo.getAlquilerBase();
-        int costeAlquiler = costeAlquilerBase;
+        int costeAlquiler = costeAlquilerBase + (int) (numCasas*0.5 + numHoteles*2);
         titulo.cobrarAlquiler(costeAlquiler);
+        return costeAlquiler;
     }
     
-    //int edificarCasa(){}
+    int edificarCasa(){
+        this.setNumCasas(numCasas+1);
+        int costeEdificarCasa = titulo.getPrecioEdificar();
+        return costeEdificarCasa;
+    }
     
-    //int edificarHotel(){}
+    int edificarHotel(){
+        this.setNumHoteles(numHoteles+1);
+        int costeEdificarHotel = titulo.getPrecioEdificar();
+        return costeEdificarHotel;
+    }
     
     boolean estaHipotecada(){
-        return titulo.getHipotecada();
+        boolean hipotecada = titulo.getHipotecada();
+        return hipotecada;
     }
     
     int getCoste(){
         return coste;
     }
     
-    //int getCosteHipoteca(){}
+    // Devuelve lo que cuesta deshipotecar
+    int getCosteHipoteca(){
+        return cancelarHipoteca();
+    }
     
     int getNumeroCasilla(){
         return numeroCasilla;
@@ -78,9 +103,15 @@ public class Casilla {
         return numHoteles;
     }
     
-    //int getPrecioEdificar(){}
+    int getPrecioEdificar(){
+        return titulo.getPrecioEdificar();
+    }
     
-    //int hipotecar(){}
+    int hipotecar(){
+        titulo.setHipotecada(true);
+        int cantidadRecibida = calcularValorHipoteca();
+        return cantidadRecibida;
+    }
     
     //int precioTotalComprar(){}
     
@@ -89,9 +120,13 @@ public class Casilla {
         return encarcelado;
     }
     
-    //boolean sePuedeEdificarCasa(){}
+    boolean sePuedeEdificarCasa(){
+        return numCasas < 4;
+    }
     
-    //boolean sePuedeEdificarHotel(){}
+    boolean sePuedeEdificarHotel(){
+        return numHoteles < 4 && numHoteles == 4;
+    }
     
     void setNumCasas(int nuevoNumero){
         numCasas = nuevoNumero;
@@ -113,7 +148,14 @@ public class Casilla {
         return tengoPropietario;
     }
     
-    //int venderTitulo(){}
+    int venderTitulo(){
+        int precioCompra = coste + (numCasas + numHoteles)*titulo.getPrecioEdificar();
+        int precioVenta = precioCompra + (int) titulo.getFactorRevalorizacion()*precioCompra;
+        titulo.setPropietario(null);
+        setNumHoteles(0);
+        setNumCasas(0);
+        return precioVenta;
+    }
     
     private void setTitulo(TituloPropiedad titulo){
         this.titulo = titulo;
