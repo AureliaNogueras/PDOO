@@ -23,6 +23,11 @@ public class Jugador {
         propiedades = new ArrayList();
     }
     
+    // Añadido para el controlador
+    public int getSaldo(){
+        return saldo;
+    }
+    
     public String getNombre(){
         return nombre;
     }

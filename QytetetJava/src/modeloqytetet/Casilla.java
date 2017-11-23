@@ -91,7 +91,8 @@ public class Casilla {
         return cancelarHipoteca();
     }
     
-    int getNumeroCasilla(){
+    // Lo pongo public para que sea accesible desde el controlador
+    public int getNumeroCasilla(){
         return numeroCasilla;
     }
     
@@ -113,7 +114,11 @@ public class Casilla {
         return cantidadRecibida;
     }
     
-    //int precioTotalComprar(){}
+    int precioTotalComprar(){
+        int precio = coste + (numCasas + numHoteles)*titulo.getPrecioEdificar();
+        precio = precio + (int) (precio*titulo.getFactorRevalorizacion());
+        return precio;
+    }
     
     boolean propietarioEncarcelado(){
         boolean encarcelado = titulo.propietarioEncarcelado();
@@ -149,19 +154,19 @@ public class Casilla {
     }
     
     int venderTitulo(){
-        int precioCompra = coste + (numCasas + numHoteles)*titulo.getPrecioEdificar();
-        int precioVenta = precioCompra + (int) titulo.getFactorRevalorizacion()*precioCompra;
         titulo.setPropietario(null);
         setNumHoteles(0);
         setNumCasas(0);
-        return precioVenta;
+        return precioTotalComprar();
     }
     
     private void setTitulo(TituloPropiedad titulo){
         this.titulo = titulo;
     }
     
-    private void asignarTituloPropiedad(){}
+    private void asignarTituloPropiedad(){
+    
+    }
     
     @Override
     public String toString(){

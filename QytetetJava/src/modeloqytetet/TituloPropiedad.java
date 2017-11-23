@@ -50,7 +50,8 @@ public class TituloPropiedad {
         return hipotecada;
     }
     
-    String getNombre(){
+    // Cambiada visibilidad para el controlador
+    public String getNombre(){
         return nombre;
     }
   
