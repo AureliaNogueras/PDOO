@@ -19,15 +19,24 @@ module ModeloQytetet
     attr_writer :hipotecada
     
     def cobrarAlquiler(coste)
-      
+      @propietario.modificarSaldo(-coste)
+    end
+    
+    # para propiedadesHipotecaJugador
+    def getCasilla
+      @casilla
     end
     
     def propietarioEncarcelado
-      
+      @propietario.getEncarcelado
     end
     
     def setCasilla(casilla)
       @casilla = casilla
+    end
+    
+    def setHipotecada(hipotecada)
+      @hipotecada = hipotecada
     end
       
     def setPropietario(propietario)
@@ -35,7 +44,11 @@ module ModeloQytetet
     end
     
     def tengoPropietario
-      
+      tengo = false
+      if (@propietario != nil)
+        tengo = true
+      end
+      tengo
     end
     
     def to_s

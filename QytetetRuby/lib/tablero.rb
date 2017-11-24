@@ -10,17 +10,29 @@ module ModeloQytetet
     end
     
     def esCasillaCarcel(numeroCasilla)
-      
+      comprobacion = false
+      if (numeroCasilla == @carcel.numeroCasilla)
+        comprobacion = true
+      end
+      comprobacion
     end
     
     attr_reader :carcel
     
     def obtenerCasillaNumero(numeroCasilla)
-      
+      cas = nil
+      @casillas.each { |c|
+        if (c.numeroCasilla == numeroCasilla)
+          cas = c
+        end  
+      }
+      cas
     end
     
     def obtenerNuevaCasilla(casilla, desplazamiento)
-      
+      nuevoNumCasilla = casilla.numeroCasilla + desplazamiento
+      nuevoNumCasilla %= 20
+      @casillas[nuevoNumCasilla]
     end
     
     def inicializar

@@ -12,7 +12,7 @@ module ModeloQytetet
     end
     
     def tirar
-      
+      rand(6)+1
     end
     
   end
