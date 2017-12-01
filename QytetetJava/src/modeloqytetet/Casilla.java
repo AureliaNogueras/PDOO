@@ -130,7 +130,7 @@ public class Casilla {
     }
     
     boolean sePuedeEdificarHotel(){
-        return numHoteles < 4 && numHoteles == 4;
+        return numHoteles < 4 && numCasas == 4;
     }
     
     void setNumCasas(int nuevoNumero){
@@ -170,7 +170,7 @@ public class Casilla {
     
     @Override
     public String toString(){
-        return "Casilla{" + "número de casilla=" + Integer.toString(numeroCasilla) + 
+        return "Casilla{" + " número de casilla=" + Integer.toString(numeroCasilla) + 
                 ", coste=" + Integer.toString(coste) + ", número de casas=" +
                 Integer.toString(numCasas) + ", número de hoteles=" + Integer.toString(numHoteles) +
                 ", tipo de casilla=" + tipo + ", título de propiedad=" + titulo + "}\n";

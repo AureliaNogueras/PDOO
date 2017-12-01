@@ -142,8 +142,8 @@ public class Qytetet {
     
     public void inicializarJuego(ArrayList<String> nombres){
         inicializarJugadores(nombres);
-        inicializarCartasSorpresa();
         inicializarTablero();
+        inicializarCartasSorpresa();
         salidaJugadores();
     }
     

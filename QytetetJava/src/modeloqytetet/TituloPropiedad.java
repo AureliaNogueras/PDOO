@@ -85,11 +85,11 @@ public class TituloPropiedad {
     
     @Override
     public String toString(){
-        return "Título propiedad{" + "nombre=" + nombre + ", hipotecado=" +
-                hipotecada + ", alquiler base=" + Integer.toString(alquilerBase) + 
-                ", factor revalorización=" + Float.toString(factorRevalorizacion)
-                + ", hipoteca base=" + Integer.toString(hipotecaBase) + ", precio edificar="
-                + Integer.toString(precioEdificar) + ", propietario=" + propietario + 
-                ", casilla=" + casilla + "}\n";
+        return "Título propiedad" + " \nnombre=" + nombre + " \nhipotecado=" +
+                hipotecada + " \nalquiler base=" + Integer.toString(alquilerBase) + 
+                " \nfactor revalorización=" + factorRevalorizacion
+                + " \nhipoteca base=" + Integer.toString(hipotecaBase) + " \nprecio edificar="
+                + Integer.toString(precioEdificar) + " \npropietario=" + propietario + 
+                " \ncasilla=" + casilla + "\n";
     }
 }

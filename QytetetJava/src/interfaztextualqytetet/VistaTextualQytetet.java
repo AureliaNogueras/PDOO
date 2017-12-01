@@ -14,7 +14,7 @@ public class VistaTextualQytetet {
     
     public int menuGestionInmobiliaria(){ //ejemplo de menú
      
-        this.mostrar("Elige la gestion inmobiliaria que deseas hacer");
+        this.mostrar("Elige la gestión inmobiliaria que deseas hacer");
         Map<Integer, String> menuGI = new TreeMap();
         menuGI.put(0, "Siguiente Jugador"); 
         menuGI.put(1, "Edificar casa");
@@ -102,15 +102,15 @@ public class VistaTextualQytetet {
         try {  
             opcion =Integer.parseInt(lectura);
             if (opcion<min || opcion>max) { // No es un entero entre los válidos
-                this.mostrar("el numero debe estar entre min y max");
+                this.mostrar("el número debe estar entre min y max");
                 valido = false;}
         
         } catch (NumberFormatException e) { // No se ha introducido un entero
-            this.mostrar("debes introducir un numero");
+            this.mostrar("debes introducir un número");
             valido = false;  
         }
         if (!valido) {
-            this.mostrar("\n\n Seleccion erronea. Intentalo de nuevo.\n\n");
+            this.mostrar("\n\n Selecciún errónea. Inténtalo de nuevo.\n\n");
         }
         return valido;
    }

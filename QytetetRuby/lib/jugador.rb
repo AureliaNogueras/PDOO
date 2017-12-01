@@ -187,35 +187,37 @@ module ModeloQytetet
     end
     
     def venderPropiedad(casilla)
-      int precioVenta = casilla.venderTitulo();
-        modificarSaldo(precioVenta);
-        eliminarDeMisPropiedades(casilla);
+      precioVenta = casilla.venderTitulo
+      modificarSaldo(precioVenta)
+      eliminarDeMisPropiedades(casilla)
     end
     
     private 
     
     def cuantasCasasHotelesTengo
-      int total= 0;
-        for (TituloPropiedad t: propiedades){
-            total += t.getCasilla().getNumCasas() + t.getCasilla().getNumHoteles();
-        }
-        return total;
+      total= 0
+      @propiedades.each{ |t|
+        total += t.getCasilla.numCasas + t.getCasilla.numHoteles
+      }
+      total
     end
-    #tiempo medio de respuesta desde que pido algo al servidor hasta que lo da
+    
     def eliminarDeMisPropiedades(casilla)
-      for (TituloPropiedad t: propiedades){
-            if (t == casilla.getTitulo())
-                propiedades.remove(t);
-        }
+      @propiedades.each{ |t|
+        if (t == casilla.titulo)
+          @propiedades.delete(t)
+        end
+      }
     end
     
     def esDeMiPropiedad(casilla)
-      boolean propiedad = false;
-        for (TituloPropiedad t: propiedades){
-            if (t == casilla.getTitulo())
-                propiedad = true;
-        }
-        return propiedad;
+      propiedad = false
+      @propiedades.each{ |t|
+        if (t == casilla.titulo)
+          propiedad = true
+        end
+      }
+      propiedad
     end
     
     def tengoSaldo(cantidad)

@@ -52,6 +52,7 @@ public class Jugador {
         return tengo;
     }
     
+    // Modificados signos de modificarSaldo
     boolean actualizarPosicion(Casilla casilla){
         if (casilla.getNumeroCasilla() < casillaActual.getNumeroCasilla())
             modificarSaldo(Qytetet.SALDO_SALIDA);
@@ -63,12 +64,12 @@ public class Jugador {
                 boolean encarcelado = casilla.propietarioEncarcelado();
                 if (!encarcelado){
                     int costeAlquiler = casilla.cobrarAlquiler();
-                    modificarSaldo(costeAlquiler);
+                    modificarSaldo(-costeAlquiler);
                 }
             }
         }else if (casilla.getTipo() == TipoCasilla.IMPUESTO){
             int coste = casilla.getCoste();
-            modificarSaldo(coste);
+            modificarSaldo(-coste);
         }
         return tienePropietario;    
     }
