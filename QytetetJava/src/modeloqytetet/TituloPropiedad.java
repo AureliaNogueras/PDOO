@@ -24,7 +24,7 @@ public class TituloPropiedad {
     }
     
     void cobrarAlquiler(int coste){
-        propietario.modificarSaldo(-coste);
+        propietario.modificarSaldo(coste);
     }
     
     // Añadido para propiedadesHipotecadasJugador
@@ -87,6 +87,6 @@ public class TituloPropiedad {
                 hipotecada + " \n alquiler base=" + Integer.toString(alquilerBase) + 
                 " \n factor revalorización=" + factorRevalorizacion
                 + " \n hipoteca base=" + Integer.toString(hipotecaBase) + " \n precio edificar="
-                + Integer.toString(precioEdificar) + "\n";
+                + Integer.toString(precioEdificar);
     }
 }

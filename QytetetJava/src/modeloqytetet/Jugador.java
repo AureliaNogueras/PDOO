@@ -82,6 +82,8 @@ public class Jugador {
               int costeCompra = casillaActual.getCoste();
               if (costeCompra <= saldo){
                   TituloPropiedad titulo = casillaActual.asignarPropietario(this);
+                  // Añadida casilla del título
+                  titulo.setCasilla(casillaActual); 
                   propiedades.add(titulo);
                   this.modificarSaldo(-costeCompra);
                   puedoComprar = true;
@@ -134,7 +136,7 @@ public class Jugador {
     boolean pagarLibertad(int cantidad){
         boolean tengoSaldo = tengoSaldo(cantidad);
         if (tengoSaldo){
-            modificarSaldo(cantidad);
+            modificarSaldo(-cantidad);
         }
         return tengoSaldo;
     }
@@ -209,10 +211,7 @@ public class Jugador {
     }
     
     private void eliminarDeMisPropiedades(Casilla casilla){
-        for (TituloPropiedad t: propiedades){
-            if (t == casilla.getTitulo())
-                propiedades.remove(t);
-        }
+        propiedades.remove(casilla.getTitulo());
     }
     
     private boolean esDeMiPropiedad(Casilla casilla){

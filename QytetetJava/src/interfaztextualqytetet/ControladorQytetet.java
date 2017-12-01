@@ -96,7 +96,8 @@ public class ControladorQytetet {
                     if(vista.elegirQuieroComprar()){
                         if(juego.comprarTituloPropiedad()){
                             jugador = juego.getJugadorActual();
-                            vista.mostrar("Se ha realizado la compra \n");
+                            vista.mostrar("Se ha realizado la compra. Las propiedades del jugador son: \n");
+                            vista.mostrar(jugador.getPropiedades().toString());
                         }else
                             vista.mostrar("No se ha podido comprar \n");
                     }
@@ -114,7 +115,7 @@ public class ControladorQytetet {
                         if(vista.elegirQuieroComprar()){
                             if(juego.comprarTituloPropiedad()){
                                 jugador = juego.getJugadorActual();
-                                vista.mostrar("Se ha realizado la compra \n");
+                                vista.mostrar("Se ha realizado la compra. Las propiedades del jugador son: \n");
                                 vista.mostrar(jugador.getPropiedades().toString());
                             }else
                                 vista.mostrar("No se ha podido comprar \n");
@@ -144,7 +145,7 @@ public class ControladorQytetet {
             
                 menuInmobiliario(opcion);
                 jugador = juego.getJugadorActual();
-                vista.mostrar("El estado del jugador tras la acción es \n"); 
+                vista.mostrar("El estado del jugador tras la acción es: \n"); 
                 vista.mostrar(jugador.toString());
             }
         }
@@ -153,19 +154,34 @@ public class ControladorQytetet {
     private void menuInmobiliario(int opcion){
         switch (opcion) {
             case 1:
-                juego.edificarCasa(casilla);
+                if(juego.edificarCasa(casilla))
+                    vista.mostrar("Se ha edificado la casa \n");
+                else
+                    vista.mostrar("No se ha podido edificar la casa \n");
                 break;
             case 2:
-                juego.edificarHotel(casilla);
+                if(juego.edificarHotel(casilla))
+                    vista.mostrar("Se ha edificado el hotel \n");
+                else
+                    vista.mostrar("No se ha edificado el hotel \n");
                 break;
             case 3:
-                juego.venderPropiedad(casilla);
+                if(juego.venderPropiedad(casilla))
+                    vista.mostrar("Se ha vendido la propiedad \n");
+                else
+                    vista.mostrar("No se ha vendido la propiedad \n");
                 break;
             case 4:
-                juego.hipotecarPropiedad(casilla);
+                if(juego.hipotecarPropiedad(casilla))
+                    vista.mostrar("Se ha hipotecado la propiedad \n");
+                else
+                    vista.mostrar("No se ha podido hipotecar la propiedad \n");
                 break;
             case 5:
-                juego.cancelarHipoteca(casilla);
+                if(juego.cancelarHipoteca(casilla))
+                    vista.mostrar("Se ha cancelado la hipoteca \n");
+                else
+                    vista.mostrar("No se ha podido cancelar la hipoteca \n");
                 break;
             case 0:
                 break; 
@@ -191,9 +207,10 @@ public class ControladorQytetet {
         vista.mostrar("\tCasilla\tTítulo");
         int seleccion;
         ArrayList<String> listaPropiedades= new ArrayList();
-        vista.mostrar(propiedades.toString());
         for ( Casilla c: propiedades) {
-            listaPropiedades.add( "\t"+c.getNumeroCasilla()+"\t"+c.getTitulo().getNombre()); 
+            if(c != null){
+                listaPropiedades.add( "\t"+c.getNumeroCasilla()+"\t"+c.getTitulo().getNombre()); 
+            }
         }
         seleccion=vista.menuElegirPropiedad(listaPropiedades);  
         return propiedades.get(seleccion);

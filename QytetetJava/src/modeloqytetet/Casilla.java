@@ -164,10 +164,6 @@ public class Casilla {
         this.titulo = titulo;
     }
     
-    private void asignarTituloPropiedad(){
-    
-    }
-    
     @Override
     public String toString(){
         return "Casilla{" + " número de casilla=" + Integer.toString(numeroCasilla) + 

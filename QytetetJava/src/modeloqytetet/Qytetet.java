@@ -54,8 +54,8 @@ public class Qytetet {
             for (Jugador jugador: jugadores){
                 if (jugador != jugadorActual){
                     jugador.modificarSaldo(cartaActual.getValor());
-                    jugadorActual.modificarSaldo(-cartaActual.getValor());
-                }
+                }else
+                    jugadorActual.modificarSaldo(cartaActual.getValor());
             }
         }
         
@@ -153,7 +153,7 @@ public class Qytetet {
             int valorDado = dado.tirar();
             libre = valorDado>5;
         }else{
-            boolean tengoSaldo = jugadorActual.pagarLibertad(-Qytetet.PRECIO_LIBERTAD);
+            boolean tengoSaldo = jugadorActual.pagarLibertad(Qytetet.PRECIO_LIBERTAD);
             libre = tengoSaldo;
         }
         if (libre)
@@ -191,7 +191,6 @@ public class Qytetet {
     //Añadido getCasilla, hecho a partir del de Jugador
     public ArrayList<Casilla> propiedadesHipotecadasJugador(boolean hipotecadas){
         ArrayList<TituloPropiedad> titulos = jugadorActual.obtenerPropiedadesHipotecadas(hipotecadas);
-        System.out.println(jugadorActual.obtenerPropiedadesHipotecadas(false));
         ArrayList<Casilla> casillas = new ArrayList();
         for (TituloPropiedad t: titulos){
             casillas.add(t.getCasilla());
@@ -219,7 +218,7 @@ public class Qytetet {
     }
     
     private void encarcelarJugador(){
-        if (jugadorActual.tengoCartaLibertad()){
+        if (!jugadorActual.tengoCartaLibertad()){
             Casilla casillaCarcel = tablero.getCarcel();
             jugadorActual.irACarcel(casillaCarcel);
         }else{
