@@ -27,7 +27,7 @@ module ModeloQytetet
       tienePropietario = false
       if (@cartaActual.tipo == TipoSorpresa::PAGARCOBRAR)
         @jugadorActual.modificarSaldo(@cartaActual.valor)
-      elsif(cartaActual.tipo == TipoSorpresa::IRACASILLA)
+      elsif(@cartaActual.tipo == TipoSorpresa::IRACASILLA)
         esCarcel = @tablero.esCasillaCarcel(@cartaActual.valor)
         if (esCarcel)
           encarcelarJugador
@@ -35,7 +35,7 @@ module ModeloQytetet
           nuevaCasilla = @tablero.obtenerCasillaNumero(@cartaActual.valor)
           tienePropietario = @jugadorActual.actualizarPosicion(nuevaCasilla)
         end
-      elsif (cartaActual.tipo == TipoSorpresa::PORCASAHOTEL)
+      elsif (@cartaActual.tipo == TipoSorpresa::PORCASAHOTEL)
         @jugadorActual.pagarCobrarPorCasaYHotel(@cartaActual.valor)
       elsif (@cartaActual.tipo == TipoSorpresa::PORJUGADOR)
         @jugadores.each{ |jugador|
@@ -129,8 +129,8 @@ module ModeloQytetet
     
     def inicializarJuego(nombres)
       inicializarJugadores(nombres)
-      inicializarCartasSorpresa
       inicializarTablero
+      inicializarCartasSorpresa
       salidaJugadores
     end
     
@@ -236,9 +236,9 @@ module ModeloQytetet
     end
     
     def inicializarJugadores(nombres)
-      @nombres.each{ |j|
-            j = Jugador.new(n)
-            @jugadores << j
+      nombres.each{ |j|
+            n = Jugador.new(j)
+            @jugadores << n
       } 
     end
     

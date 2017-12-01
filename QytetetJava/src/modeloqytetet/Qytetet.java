@@ -191,6 +191,7 @@ public class Qytetet {
     //Añadido getCasilla, hecho a partir del de Jugador
     public ArrayList<Casilla> propiedadesHipotecadasJugador(boolean hipotecadas){
         ArrayList<TituloPropiedad> titulos = jugadorActual.obtenerPropiedadesHipotecadas(hipotecadas);
+        System.out.println(jugadorActual.obtenerPropiedadesHipotecadas(false));
         ArrayList<Casilla> casillas = new ArrayList();
         for (TituloPropiedad t: titulos){
             casillas.add(t.getCasilla());

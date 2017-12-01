@@ -24,8 +24,9 @@ public class ControladorQytetet {
             vista.mostrar("Es el turno de " + jugador.getNombre() + "\n");
             casilla = jugador.getCasillaActual();
             vista.mostrar("Su posición actual es: \n" + casilla + "\n");
-        
-            if (jugador.getEncarcelado()){
+            boolean libre = !jugador.getEncarcelado();
+            
+            if (!libre){
                 vista.mostrar("El jugador está en la cárcel :( \n");
                 
                 if (salirCarcel())
@@ -36,32 +37,42 @@ public class ControladorQytetet {
                 vista.mostrar("Pulsa \'intro\' para continuar");
                 System.in.read();
             }
-        
-            tienePropietario = juego.jugar();
-            jugador = juego.getJugadorActual();
-            casilla = jugador.getCasillaActual();
-            vista.mostrar("Se tira el dado \n");
-            vista.mostrar("El jugador " + jugador.getNombre() + " ha caído en la casilla \n" + casilla + "\n");
-            vista.mostrar("Pulsa \'intro\' para continuar");
-            System.in.read();
             
-            eleccionSegunCasilla(casilla.getTipo(),tienePropietario);
-            gestionInmobiliaria();
+            if (libre){
+                tienePropietario = juego.jugar();
+                jugador = juego.getJugadorActual();
+                casilla = jugador.getCasillaActual();
+                vista.mostrar("Se tira el dado \n");
+                vista.mostrar("El jugador " + jugador.getNombre() + " ha caído en la casilla \n" + casilla + "\n");
+                vista.mostrar("Pulsa \'intro\' para continuar");
+                System.in.read();
+                
+                eleccionSegunCasilla(casilla.getTipo(),tienePropietario);
+                gestionInmobiliaria();
             
-            if (jugador.getSaldo() > 0)
-                siguienteTurno();
-            else{
-                vista.mostrar(juego.obtenerRanking().toString());
-                bancarrota = true;
             }
+            
+            if (jugador.getSaldo() > 0){
+                siguienteTurno();
+                bancarrota = finJuego();
+            }else
+                bancarrota = finJuego();
         }
+    }
+    
+    
+    private boolean finJuego(){
+        boolean fin = false;
+        if (jugador.getSaldo()<=0){
+            vista.mostrar(juego.obtenerRanking().toString());
+            fin = true;
+            vista.mostrar("El juego ha terminado \n");
+        }
+        return fin;
     }
 
     private void siguienteTurno(){
         jugador = juego.siguienteJugador();
-        if (jugador.getSaldo() <= 0){
-            vista.mostrar(juego.obtenerRanking().toString());
-        }
     }
     
     private boolean salirCarcel(){
@@ -78,8 +89,9 @@ public class ControladorQytetet {
     }
     
     private void eleccionSegunCasilla(TipoCasilla tipo, boolean tienePropietario){
+        
         if (jugador.getSaldo()>0 && !jugador.getEncarcelado()){
-            if (tipo == TipoCasilla.CALLE){
+            if (casilla.getTipo() == TipoCasilla.CALLE){
                 if(!tienePropietario){
                     if(vista.elegirQuieroComprar()){
                         if(juego.comprarTituloPropiedad()){
@@ -90,15 +102,24 @@ public class ControladorQytetet {
                     }
                 }
   
-            }else if (tipo == TipoCasilla.SORPRESA){
+            }else if (casilla.getTipo() == TipoCasilla.SORPRESA){
                 tienePropietario = juego.aplicarSorpresa();
                 jugador = juego.getJugadorActual();
                 casilla = jugador.getCasillaActual();
-                vista.mostrar("Se coge una carta sorpresa: " + juego.getCartaActual());
-                vista.mostrar("La casilla actual es \n" + casilla + "\n");
-                vista.mostrar("El estado del jugador tras la sorpresa es \n" + jugador + "\n");
-                if (casilla.getTipo() == TipoCasilla.CALLE){
-                    eleccionSegunCasilla(TipoCasilla.CALLE, tienePropietario);
+                System.out.println("Se coge una carta sorpresa: " + juego.getCartaActual());
+                System.out.println("La casilla actual es \n" + casilla + "\n");
+                System.out.println("El estado del jugador tras la sorpresa es \n" + jugador + "\n");
+                if (jugador.getSaldo()>0 && !jugador.getEncarcelado() && casilla.getTipo() == TipoCasilla.CALLE){
+                    if(!tienePropietario){
+                        if(vista.elegirQuieroComprar()){
+                            if(juego.comprarTituloPropiedad()){
+                                jugador = juego.getJugadorActual();
+                                vista.mostrar("Se ha realizado la compra \n");
+                                vista.mostrar(jugador.getPropiedades().toString());
+                            }else
+                                vista.mostrar("No se ha podido comprar \n");
+                        }
+                    }
                 }
             }
         }
@@ -107,16 +128,24 @@ public class ControladorQytetet {
     private void gestionInmobiliaria(){
         if (!jugador.getEncarcelado() && jugador.getSaldo() > 0 && jugador.tengoPropiedades())
         {
-            int opcion = vista.menuGestionInmobiliaria();
-            if (opcion == 5)
-                casilla = elegirPropiedad(juego.propiedadesHipotecadasJugador(true));
-            else if (opcion != 1 && opcion != 0)
-                casilla = elegirPropiedad(juego.propiedadesHipotecadasJugador(false));
+            int opcion = -1;
+            while(opcion != 0){
+                opcion = vista.menuGestionInmobiliaria();
+                if (opcion == 5){
+                    ArrayList<Casilla> propiedades = juego.propiedadesHipotecadasJugador(true);
+                    vista.mostrar(propiedades.toString());
+                    casilla = elegirPropiedad(propiedades);
+                }else if (opcion != 0){
+                    ArrayList<Casilla> propiedades = juego.propiedadesHipotecadasJugador(false);
+                    vista.mostrar(propiedades.toString());
+                    casilla = elegirPropiedad(propiedades);
+                }
                 
-            while (opcion != 0){
+            
                 menuInmobiliario(opcion);
                 jugador = juego.getJugadorActual();
-                vista.mostrar("El estado del jugador tras la acción es \n" + jugador + "\n");
+                vista.mostrar("El estado del jugador tras la acción es \n"); 
+                vista.mostrar(jugador.toString());
             }
         }
     }
@@ -138,9 +167,7 @@ public class ControladorQytetet {
             case 5:
                 juego.cancelarHipoteca(casilla);
                 break;
-            default:
-                if (jugador.getSaldo() <= 0)
-                    vista.mostrar(juego.obtenerRanking().toString());
+            case 0:
                 break; 
         }
     }
@@ -164,14 +191,16 @@ public class ControladorQytetet {
         vista.mostrar("\tCasilla\tTítulo");
         int seleccion;
         ArrayList<String> listaPropiedades= new ArrayList();
-        for ( Casilla casilla: propiedades) {
-            listaPropiedades.add( "\t"+casilla.getNumeroCasilla()+"\t"+casilla.getTitulo().getNombre()); 
+        vista.mostrar(propiedades.toString());
+        for ( Casilla c: propiedades) {
+            listaPropiedades.add( "\t"+c.getNumeroCasilla()+"\t"+c.getTitulo().getNombre()); 
         }
         seleccion=vista.menuElegirPropiedad(listaPropiedades);  
         return propiedades.get(seleccion);
     }
     
     public static void main(String[] args) throws IOException {
+        
         ControladorQytetet cq = new ControladorQytetet();
         cq.inicializacionJuego();
         cq.desarrolloJuego();

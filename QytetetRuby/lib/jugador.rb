@@ -1,13 +1,16 @@
 #encoding: utf-8
 
 module ModeloQytetet
+  
+  require_relative "casilla.rb"
+  
   class Jugador
     def initialize(nombre)
       @nombre = nombre
       @encarcelado = false
       @saldo = 7500
       @cartaLibertad = nil # Su tipo será SALIRCARCEL
-      @casillaActual = nil
+      @casillaActual = Casilla.newCasillaNoCalle(0,TipoCasilla::SALIDA)
       @propiedades = Array.new
     end
     
@@ -42,6 +45,7 @@ module ModeloQytetet
     end
     
     def actualizarPosicion(casilla)
+      if(casilla != nil)
       if (casilla.numeroCasilla < @casillaActual.numeroCasilla)
         modificarSaldo(Qytetet::SALDO_SALIDA)
         tienePropietario = false
@@ -57,10 +61,11 @@ module ModeloQytetet
           end
         end
       elsif (casilla.tipo == TipoCasilla::IMPUESTO)
-        coste = casilla.getCoste
+        coste = casilla.coste
         modificarSaldo(coste)
       end
       tienePropietario
+      end
     end
     
     def comprarTitulo

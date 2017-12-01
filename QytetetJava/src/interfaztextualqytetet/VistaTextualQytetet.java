@@ -110,7 +110,7 @@ public class VistaTextualQytetet {
             valido = false;  
         }
         if (!valido) {
-            this.mostrar("\n\n Selecciún errónea. Inténtalo de nuevo.\n\n");
+            this.mostrar("\n\n Selección errónea. Inténtalo de nuevo.\n\n");
         }
         return valido;
    }
