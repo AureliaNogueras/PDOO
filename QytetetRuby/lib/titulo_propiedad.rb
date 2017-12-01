@@ -54,8 +54,7 @@ module ModeloQytetet
     def to_s
       "Título propiedad: \n nombre= #{@nombre} \n hipotecado= #{@hipotecada} 
       \n alquiler base= #{@alquilerBase} \n factor revalorización= #{@factorRevalorizacion}
-      \n hipoteca base= #{@hipotecaBase} \n precio edificar= #{@precioEdificar} \n propietario= 
-      #{@propietario} \n casilla= #{@casilla}"
+      \n hipoteca base= #{@hipotecaBase} \n precio edificar= #{@precioEdificar}"
     end
   end
 end

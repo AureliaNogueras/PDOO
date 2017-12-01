@@ -116,8 +116,8 @@ module ModeloQytetet
     
     def venderTitulo
       @titulo.setPropietario(nil)
-      setNumHoteles(0)
-      setNumCasas(0)
+      numHoteles = 0
+      numCasas = 0
       precioTotalComprar
     end
    

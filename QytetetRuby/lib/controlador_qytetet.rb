@@ -29,7 +29,7 @@ module InterfazTextualQytetet
       while (!bancarrota)
         @vista.mostrar("Es el turno de #{@jugador.getNombre} \n")
         @casilla = @jugador.getCasillaActual
-        @vista.mostrar("Su posición actual es: #{@casilla} \n")
+        @vista.mostrar("Su posición actual es: \n #{@casilla} \n")
         libre = !@jugador.getEncarcelado
             
         if (!libre)
@@ -48,7 +48,7 @@ module InterfazTextualQytetet
           @jugador = @juego.getJugadorActual
           @casilla = @jugador.getCasillaActual
           @vista.mostrar("Se tira el dado \n")
-          @vista.mostrar("El jugador #{@jugador.getNombre} ha caído en la casilla #{@casilla} \n")
+          @vista.mostrar("El jugador #{@jugador.getNombre} ha caído en la casilla \n #{@casilla} \n")
           pausa
                 
           eleccionSegunCasilla(@casilla.tipo,tienePropietario)
@@ -113,8 +113,8 @@ module InterfazTextualQytetet
               @jugador = @juego.getJugadorActual
               @casilla = @jugador.getCasillaActual
               @vista.mostrar("Se coge una carta sorpresa: #{@juego.getCartaActual} \n")
-              @vista.mostrar("La casilla actual es #{@casilla} \n")
-              @vista.mostrar("El estado del jugador tras la sorpresa es #{@jugador} \n")
+              @vista.mostrar("La casilla actual es \n #{@casilla} \n")
+              @vista.mostrar("El estado del jugador tras la sorpresa es \n #{@jugador} \n")
               if (@jugador.getSaldo>0 and !@jugador.getEncarcelado and @casilla.tipo == ModeloQytetet::TipoCasilla::CALLE)
                 if(!tienePropietario)
                   if(@vista.elegir_quiero_comprar)
@@ -145,7 +145,7 @@ module InterfazTextualQytetet
             
             menuInmobiliario(opcion)
             @jugador = @juego.getJugadorActual
-            @vista.mostrar("El estado del jugador tras la acción es #{@jugador}\n")
+            @vista.mostrar("El estado del jugador tras la acción es \n #{@jugador}\n")
           end
         end
     end
@@ -153,15 +153,35 @@ module InterfazTextualQytetet
     def menuInmobiliario(opcion)
       case opcion
         when 1
-          @juego.edificarCasa(@casilla)
+          if @juego.edificarCasa(@casilla)
+            vista.mostrar("Se ha edificado la casa \n")
+          else
+            vista.mostrar("No se ha podido edificar la casa \n")
+          end
         when 2
-          @juego.edificarHotel(@casilla)
+          if @juego.edificarHotel(@casilla)
+            vista.mostrar("Se ha edificado el hotel \n")
+          else
+            vista.mostrar("No se ha podido edificar el hotel \n")
+          end
         when 3
-          @juego.venderPropiedad(@casilla)
+          if @juego.venderPropiedad(@casilla)
+            vista.mostrar("Se ha vendido la propiedad \n")
+          else
+            vista.mostrar("No se ha podido vender la propiedad \n")
+          end
         when 4
-          @juego.hipotecarPropiedad(@casilla)
+          if @juego.hipotecarPropiedad(@casilla)
+            vista.mostrar("Se ha hipotecado la propiedad \n")
+          else
+            vista.mostrar("No se ha podido hipotecar la propiedad \n")
+          end
         when 5
-          @juego.cancelarHipoteca(@casilla)
+          if @juego.cancelarHipoteca(@casilla)
+            vista.mostrar("Se ha cancelado la hipoteca \n")
+          else
+            vista.mostrar("No se ha podido cancelar la hipoteca \n")
+          end
       else
         
       end

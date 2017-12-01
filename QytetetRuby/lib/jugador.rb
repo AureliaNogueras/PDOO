@@ -150,7 +150,7 @@ module ModeloQytetet
       esMia = esDeMiPropiedad(casilla)
       tengoSaldo = false
       if(esMia)
-        costeEdificarHotel = casilla.precioEdificar
+        costeEdificarHotel = casilla.getPrecioEdificar
         tengoSaldo = tengoSaldo(costeEdificarHotel)
       end
       esMia and tengoSaldo
