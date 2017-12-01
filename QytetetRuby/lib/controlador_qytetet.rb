@@ -40,7 +40,6 @@ module InterfazTextualQytetet
           else
             @vista.mostrar("El jugador no ha conseguido salir de prisión \n")
           end
-          @vista.mostrar("Pulsa \'intro\' para continuar")
           pausa
         end
             
@@ -50,7 +49,6 @@ module InterfazTextualQytetet
           @casilla = @jugador.getCasillaActual
           @vista.mostrar("Se tira el dado \n")
           @vista.mostrar("El jugador #{@jugador.getNombre} ha caído en la casilla #{@casilla} \n")
-          @vista.mostrar("Pulsa \'intro\' para continuar")
           pausa
                 
           eleccionSegunCasilla(@casilla.tipo,tienePropietario)
@@ -83,7 +81,7 @@ module InterfazTextualQytetet
     end
     
     def salirCarcel
-      opcion = @vista.menuSalirCarcel
+      opcion = @vista.menu_salir_carcel
       libre = false
       metodo = nil
       if (opcion == 0)
@@ -101,7 +99,7 @@ module InterfazTextualQytetet
         if (@jugador.getSaldo>0 and !@jugador.getEncarcelado)
             if (@casilla.tipo == ModeloQytetet::TipoCasilla::CALLE)
               if(!tienePropietario)
-                if(@vista.elegirQuieroComprar)
+                if(@vista.elegir_quiero_comprar)
                   if(@juego.comprarTituloPropiedad)
                     @jugador = @juego.getJugadorActual
                     @vista.mostrar("Se ha realizado la compra \n")
@@ -119,7 +117,7 @@ module InterfazTextualQytetet
               @vista.mostrar("El estado del jugador tras la sorpresa es #{@jugador} \n")
               if (@jugador.getSaldo>0 and !@jugador.getEncarcelado and @casilla.tipo == ModeloQytetet::TipoCasilla::CALLE)
                 if(!tienePropietario)
-                  if(@vista.elegirQuieroComprar)
+                  if(@vista.elegir_quiero_comprar)
                     if(@juego.comprarTituloPropiedad)
                       @jugador = @juego.getJugadorActual
                       @vista.mostrar("Se ha realizado la compra \n")
@@ -138,11 +136,11 @@ module InterfazTextualQytetet
         if (!@jugador.getEncarcelado() and @jugador.getSaldo() > 0 and @jugador.tengoPropiedades())
           opcion = -1
           while(opcion != 0)
-            opcion = @vista.menuGestionInmobiliaria
+            opcion = @vista.menu_gestion_inmobiliaria
             if (opcion == 5)
-              @casilla = elegirPropiedad(@juego.propiedadesHipotecadasJugador(true))
+              @casilla = elegir_propiedad(@juego.propiedadesHipotecadasJugador(true))
             elsif (opcion != 0)
-              @casilla = elegirPropiedad(@juego.propiedadesHipotecadasJugador(false))
+              @casilla = elegir_propiedad(@juego.propiedadesHipotecadasJugador(false))
             end
             
             menuInmobiliario(opcion)

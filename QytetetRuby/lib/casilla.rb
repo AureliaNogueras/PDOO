@@ -2,7 +2,7 @@
 
 module ModeloQytetet
   class Casilla
-    def initialize(c, nc, t, ti)
+    def initialize(nc, c, t, ti)
       @coste = c
       @numeroCasilla = nc
       @numCasas = 0
@@ -103,7 +103,7 @@ module ModeloQytetet
     
     def soyEdificable
       edificable = false
-      if (@tipo == TipoCasilla::CALLE)
+      if (tipo == TipoCasilla::CALLE)
         edificable = true
       end
       edificable
@@ -125,11 +125,6 @@ module ModeloQytetet
       "Casilla: \n número de casilla= #{@numeroCasilla} \n coste= #{@coste}
       \n número de casas= #{@numCasas} \n número de hoteles= #{@numHoteles}
       \n tipo de casilla= #{@tipo} \n título de propiedad= #{@titulo} \n"
-    end
-    
-    private 
-    def asignarTituloPropiedad
-      
     end
   end
 end

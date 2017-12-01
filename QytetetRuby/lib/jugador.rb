@@ -45,27 +45,27 @@ module ModeloQytetet
     end
     
     def actualizarPosicion(casilla)
-      if(casilla != nil)
+      #if(casilla != nil)
       if (casilla.numeroCasilla < @casillaActual.numeroCasilla)
-        modificarSaldo(Qytetet::SALDO_SALIDA)
-        tienePropietario = false
-        setCasillaActual(casilla)
-        if (casilla.soyEdificable)
-          tienePropietario = casilla.tengoPropietario
-          if (tienePropietario)
-            encarcelado = casilla.propietarioEncarcelado
-            if (!encarcelado)
-              costeAlquiler = casilla.cobrarAlquiler
-              modificarSaldo(costeAlquiler)
-            end
+        modificarSaldo(Qytetet::SALDOSALIDA)
+      end
+      tienePropietario = false
+      setCasillaActual(casilla)
+      if (casilla.soyEdificable)
+        tienePropietario = casilla.tengoPropietario
+        if (tienePropietario)
+          encarcelado = casilla.propietarioEncarcelado
+          if (!encarcelado)
+            costeAlquiler = casilla.cobrarAlquiler
+            modificarSaldo(-costeAlquiler)
           end
         end
       elsif (casilla.tipo == TipoCasilla::IMPUESTO)
         coste = casilla.coste
-        modificarSaldo(coste)
+        modificarSaldo(-coste)
+      
       end
       tienePropietario
-      end
     end
     
     def comprarTitulo
@@ -73,9 +73,10 @@ module ModeloQytetet
       if (@casillaActual.soyEdificable)
         tengoPropietario = @casillaActual.tengoPropietario
         if (!tengoPropietario)
-          costeCompra =  @casillaActual.getCoste
-          if (costeCompra <= saldo)
+          costeCompra =  @casillaActual.coste
+          if (costeCompra <= @saldo)
             titulo = @casillaActual.asignarPropietario(self)
+            titulo.setCasilla(@casillaActual)
             @propiedades << titulo
             modificarSaldo(-costeCompra)
             puedoComprar = true
@@ -130,7 +131,7 @@ module ModeloQytetet
     def pagarLibertad(cantidad)
       tengoSaldo = tengoSaldo(cantidad)
       if (tengoSaldo)
-        modificarSaldo(cantidad)
+        modificarSaldo(-cantidad)
       end
       tengoSaldo
     end
@@ -139,10 +140,10 @@ module ModeloQytetet
       esMia = esDeMiPropiedad(casilla)
       tengoSaldo = false
       if(esMia)
-        costeEdificarCasa = casilla.precioEdificar
+        costeEdificarCasa = casilla.getPrecioEdificar
         tengoSaldo = tengoSaldo(costeEdificarCasa)
       end
-      esMia && tengoSaldo
+      esMia and tengoSaldo
     end
     
     def puedoEdificarHotel(casilla)
@@ -152,7 +153,7 @@ module ModeloQytetet
         costeEdificarHotel = casilla.precioEdificar
         tengoSaldo = tengoSaldo(costeEdificarHotel)
       end
-      esMia && tengoSaldo
+      esMia and tengoSaldo
     end
     
     def puedoHipotecar(casilla)
@@ -168,7 +169,7 @@ module ModeloQytetet
     def puedoVenderPropiedad(casilla)
       esMia = esDeMiPropiedad(casilla)
       hipotecada = casilla.estaHipotecada
-      esMia && !hipotecada
+      esMia and !hipotecada
     end
     
     def setCartaLibertad(carta)
@@ -208,11 +209,7 @@ module ModeloQytetet
     end
     
     def eliminarDeMisPropiedades(casilla)
-      @propiedades.each{ |t|
-        if (t == casilla.titulo)
-          @propiedades.delete(t)
-        end
-      }
+      @propiedades.delete(casilla.titulo)
     end
     
     def esDeMiPropiedad(casilla)

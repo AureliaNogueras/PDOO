@@ -75,13 +75,17 @@ module ModeloQytetet
       c = Casilla.newCasillaNoCalle(0,TipoCasilla::SALIDA)
       ti = TituloPropiedad.new("Catedral",75,11,600,500);
       q = Qytetet.instance
-        
-      puts j
-      puts t
-      puts s
-      puts c
-      puts ti
-      puts q
+      nombres = Array.new
+      nombres << "Yo"
+      nombres << "Tú"
+      q.inicializarJuego(nombres)  
+      puts q.tablero.obtenerNuevaCasilla(c, 6)
+      #puts j
+      #puts t
+      #puts s
+      #puts c
+      #puts ti
+      #puts q
       
       #puts @@tablero
     end

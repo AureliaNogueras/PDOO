@@ -19,7 +19,7 @@ module ModeloQytetet
     attr_writer :hipotecada
     
     def cobrarAlquiler(coste)
-      @propietario.modificarSaldo(-coste)
+      @propietario.modificarSaldo(coste)
     end
     
     # para propiedadesHipotecaJugador

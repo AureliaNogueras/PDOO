@@ -22,9 +22,10 @@ module ModeloQytetet
       @tablero = nil
       @dado = Dado.instance
     end
-    
+   
     def aplicarSorpresa
       tienePropietario = false
+      if (@cartaActual != nil)
       if (@cartaActual.tipo == TipoSorpresa::PAGARCOBRAR)
         @jugadorActual.modificarSaldo(@cartaActual.valor)
       elsif(@cartaActual.tipo == TipoSorpresa::IRACASILLA)
@@ -41,7 +42,8 @@ module ModeloQytetet
         @jugadores.each{ |jugador|
           if (jugador != @jugadorActual)
             jugador.modificarSaldo(@cartaActual.valor)
-            @jugadorActual.modificarSaldo(-@cartaActual.valor)
+          else
+            @jugadorActual.modificarSaldo(@cartaActual.valor)
           end
         }
       end
@@ -53,11 +55,12 @@ module ModeloQytetet
         @mazo << @cartaActual
       end
       tienePropietario
+      end
     end
     
     def cancelarHipoteca(casilla)
       cancelarHipoteca = false
-      if (casilla.estaHipotecada && @jugadorActual.puedoPagarHipoteca(casilla))
+      if (casilla.estaHipotecada and @jugadorActual.puedoPagarHipoteca(casilla))
         cantidadRecibida = casilla.getCosteHipoteca
         @jugadorActual.modificarSaldo(-cantidadRecibida) 
         cancelarHipoteca = true
@@ -115,7 +118,7 @@ module ModeloQytetet
     def hipotecarPropiedad(casilla)
       puedoHipotecar = false
       if (casilla.soyEdificable)
-        sePuedeHipotecar = !casilla.estaHipotecada()
+        sePuedeHipotecar = !casilla.estaHipotecada
         if (sePuedeHipotecar)
           puedoHipotecar = @jugadorActual.puedoHipotecar(casilla)
           if (puedoHipotecar)
@@ -140,7 +143,7 @@ module ModeloQytetet
         valorDado = @dado.tirar
         libre = valorDado>5
       else
-        tengoSaldo = @jugadorActual.pagarLibertad(-Qytetet::PRECIO_LIBERTAD)
+        tengoSaldo = @jugadorActual.pagarLibertad(Qytetet::PRECIOLIBERTAD)
         libre = tengoSaldo 
       end
       if (libre)
@@ -154,6 +157,7 @@ module ModeloQytetet
       casillaPosicion = @jugadorActual.getCasillaActual
       nuevaCasilla = @tablero.obtenerNuevaCasilla(casillaPosicion,valorDado)
       tienePropietario = @jugadorActual.actualizarPosicion(nuevaCasilla)
+      #if(nuevaCasilla != nil)
       if (!nuevaCasilla.soyEdificable)
         if (nuevaCasilla.tipo == TipoCasilla::JUEZ)
           encarcelarJugador
@@ -163,6 +167,7 @@ module ModeloQytetet
           @mazo.delete(@cartaActual)
         end
       end
+      #end
       tienePropietario
     end
     
@@ -208,7 +213,7 @@ module ModeloQytetet
     private
     
     def encarcelarJugador
-      if (@jugadorActual.tengoCartaLibertad)
+      if (!@jugadorActual.tengoCartaLibertad)
         casillaCarcel = @tablero.carcel
         @jugadorActual.irACarcel(casillaCarcel)
       else
