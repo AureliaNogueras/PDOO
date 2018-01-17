@@ -6,7 +6,9 @@ import java.util.ArrayList;
  *
  * @author aurelia
  */
+// Castings y calles para solucionar conflictos
 public class Jugador {
+    static int FactorEspeculador = 1;
     private boolean encarcelado = false;
     private String nombre;
     private int saldo = 7500;
@@ -21,6 +23,28 @@ public class Jugador {
         cartaLibertad = null;
         casillaActual = null;
         propiedades = new ArrayList();
+    }
+    
+    protected Jugador(Jugador jugador){
+        this.nombre = jugador.getNombre();
+        this.encarcelado = jugador.getEncarcelado();
+        this.saldo = jugador.getSaldo();
+        this.cartaLibertad = jugador.cartaLibertad;
+        this.casillaActual = jugador.getCasillaActual();
+        this.propiedades = jugador.getPropiedades();
+    }
+    
+    protected void pagarImpuestos(int cantidad){
+        modificarSaldo(-cantidad);
+    }
+    
+    protected Especulador convertirme(int fianza){
+        Especulador e = new Especulador(this,fianza);
+        return e;
+    }
+    
+    public int getFactorEspeculador(){
+        return FactorEspeculador;
     }
     
     // Añadido para el controlador
@@ -53,23 +77,23 @@ public class Jugador {
     }
     
     // Modificados signos de modificarSaldo
-    boolean actualizarPosicion(Casilla casilla){
+    protected boolean actualizarPosicion(Casilla casilla){
         if (casilla.getNumeroCasilla() < casillaActual.getNumeroCasilla())
             modificarSaldo(Qytetet.SALDO_SALIDA);
         boolean tienePropietario = false;
         setCasillaActual(casilla);
         if (casilla.soyEdificable()){
-            tienePropietario = casilla.tengoPropietario();
+            tienePropietario = ((Calle)casilla).tengoPropietario();
             if (tienePropietario){
-                boolean encarcelado = casilla.propietarioEncarcelado();
+                boolean encarcelado = ((Calle)casilla).propietarioEncarcelado();
                 if (!encarcelado){
-                    int costeAlquiler = casilla.cobrarAlquiler();
+                    int costeAlquiler = ((Calle)casilla).cobrarAlquiler();
                     modificarSaldo(-costeAlquiler);
                 }
             }
         }else if (casilla.getTipo() == TipoCasilla.IMPUESTO){
-            int coste = casilla.getCoste();
-            modificarSaldo(-coste);
+            // Modificado para especulador, ponemos un impuesto de 300
+            pagarImpuestos(300);
         }
         return tienePropietario;    
     }
@@ -77,11 +101,11 @@ public class Jugador {
     boolean comprarTitulo(){
         boolean puedoComprar = false;
         if (casillaActual.soyEdificable()){
-          boolean tengoPropietario = casillaActual.tengoPropietario();
+          boolean tengoPropietario = ((Calle)casillaActual).tengoPropietario();
           if (!tengoPropietario){
-              int costeCompra = casillaActual.getCoste();
+              int costeCompra = ((Calle)casillaActual).getCoste();
               if (costeCompra <= saldo){
-                  TituloPropiedad titulo = casillaActual.asignarPropietario(this);
+                  TituloPropiedad titulo = ((Calle)casillaActual).asignarPropietario(this);
                   // Añadida casilla del título
                   titulo.setCasilla(casillaActual); 
                   propiedades.add(titulo);
@@ -111,7 +135,7 @@ public class Jugador {
     int obtenerCapital(){
         int capital = saldo;
         for (TituloPropiedad t: propiedades){
-            capital += t.getCasilla().getCoste() + (t.getCasilla().getNumCasas() + t.getCasilla().getNumHoteles())*t.getPrecioEdificar();
+            capital += ((Calle)t.getCasilla()).getCoste() + ((Calle)t.getCasilla()).getNumCasas() + ((Calle)t.getCasilla()).getNumHoteles()* t.getPrecioEdificar();
             if (t.getHipotecada())
                 capital -= t.getHipotecaBase();
         }
@@ -141,7 +165,7 @@ public class Jugador {
         return tengoSaldo;
     }
     
-    boolean puedoEdificarCasa(Casilla casilla){
+    boolean puedoEdificarCasa(Calle casilla){
         boolean esMia = esDeMiPropiedad(casilla);
         boolean tengoSaldo = false;
         if(esMia){
@@ -151,7 +175,7 @@ public class Jugador {
         return esMia && tengoSaldo;
     }
     
-    boolean puedoEdificarHotel(Casilla casilla){
+    boolean puedoEdificarHotel(Calle casilla){
         boolean esMia = esDeMiPropiedad(casilla);
         boolean tengoSaldo = false;
         if(esMia){
@@ -161,17 +185,17 @@ public class Jugador {
         return esMia && tengoSaldo;
     }
     
-    boolean puedoHipotecar(Casilla casilla){
+    boolean puedoHipotecar(Calle casilla){
         boolean esMia = esDeMiPropiedad(casilla);
         return esMia;
     }
     
-    boolean puedoPagarHipoteca(Casilla casilla){
+    boolean puedoPagarHipoteca(Calle casilla){
         boolean puedoPagar = tengoSaldo(casilla.getCosteHipoteca());
         return puedoPagar;
     }
     
-    boolean puedoVenderPropiedad(Casilla casilla){
+    boolean puedoVenderPropiedad(Calle casilla){
         boolean esMia = esDeMiPropiedad(casilla);
         boolean hipotecada = casilla.estaHipotecada();
         return esMia && !hipotecada;
@@ -196,7 +220,7 @@ public class Jugador {
         return tengo;
     }
     
-    void venderPropiedad(Casilla casilla){
+    void venderPropiedad(Calle casilla){
         int precioVenta = casilla.venderTitulo();
         modificarSaldo(precioVenta);
         eliminarDeMisPropiedades(casilla);
@@ -205,16 +229,16 @@ public class Jugador {
     private int cuantasCasasHotelesTengo(){
         int total= 0;
         for (TituloPropiedad t: propiedades){
-            total += t.getCasilla().getNumCasas() + t.getCasilla().getNumHoteles();
+            total += ((Calle)t.getCasilla()).getNumCasas() + ((Calle)t.getCasilla()).getNumHoteles();
         }
         return total;
     }
     
-    private void eliminarDeMisPropiedades(Casilla casilla){
+    private void eliminarDeMisPropiedades(Calle casilla){
         propiedades.remove(casilla.getTitulo());
     }
     
-    private boolean esDeMiPropiedad(Casilla casilla){
+    private boolean esDeMiPropiedad(Calle casilla){
         boolean propiedad = false;
         for (TituloPropiedad t: propiedades){
             if (t == casilla.getTitulo())

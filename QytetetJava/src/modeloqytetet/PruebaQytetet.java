@@ -66,13 +66,13 @@ public class PruebaQytetet {
         
         //System.out.println(tablero.getCarcel());
         
-        Jugador j = new Jugador ("Aurelia");
+        /*Jugador j = new Jugador ("Aurelia");
         Tablero t = new Tablero();
         Sorpresa s = new Sorpresa("Hola, ve a la casilla 4",TipoSorpresa.IRACASILLA,4);
         Casilla c = new Casilla(0,TipoCasilla.SALIDA);
         TituloPropiedad ti = new TituloPropiedad("Catedral",75,11,600,500);
         Casilla ca = new Casilla(2,400,ti);
-        Qytetet q = Qytetet.getInstance();
+        Qytetet q = Qytetet.getInstance();*/
         
         /*System.out.println(j);
         System.out.println(t);
@@ -80,7 +80,7 @@ public class PruebaQytetet {
         System.out.println(c);
         System.out.println(ti);
         System.out.println(q);*/
-        ArrayList<String> nombres = new ArrayList();
+        /*ArrayList<String> nombres = new ArrayList();
         nombres.add("Yo");
         nombres.add("Tú");
         q.inicializarJuego(nombres);
@@ -89,7 +89,7 @@ public class PruebaQytetet {
         System.out.println(q.propiedadesHipotecadasJugador(false));
         //q.getJugadorActual().comprarTitulo();
         //System.out.println(q.propiedadesHipotecadasJugador(false));
-        
+        */
     }
     
 }

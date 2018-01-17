@@ -14,7 +14,8 @@ public class Dado {
     }
     
     int tirar(){
-        return (int) (Math.random()*6) + 1;
+        //return (int) (Math.random()*6) + 1;
+        return 3;
     }
     
 }
