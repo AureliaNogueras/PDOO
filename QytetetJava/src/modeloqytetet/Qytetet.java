@@ -238,13 +238,7 @@ public class Qytetet {
     }
     
     private void inicializarCartasSorpresa(){
-        mazo.add(new Sorpresa("Enhorabuena, al fin has conseguido convertirte en especulador.",TipoSorpresa.CONVERTIRME,3000));
-        
         mazo.add(new Sorpresa("Han pillado alguno de tus chanchullos. Ve a la cárcel.",TipoSorpresa.IRACASILLA,tablero.getCarcel().getNumeroCasilla()));
-        
-        mazo.add(new Sorpresa("Han pillado alguno de tus chanchullos. Ve a la cárcel.",TipoSorpresa.IRACASILLA,tablero.getCarcel().getNumeroCasilla()));
-        
-        
         mazo.add(new Sorpresa("Un extraño tornado te arrastra hasta la casilla 13.",TipoSorpresa.IRACASILLA,13));
         mazo.add(new Sorpresa("El poder de la fuerza te atrae hasta la casilla 2.",TipoSorpresa.IRACASILLA,2));
         mazo.add(new Sorpresa("Quedas libre de la cárcel. No es aplicable en la vida real",TipoSorpresa.SALIRCARCEL,0));
@@ -258,9 +252,9 @@ public class Qytetet {
         mazo.add(new Sorpresa("Los demás jugadores sospechan de ti. Los sobornas para que no te delaten.",TipoSorpresa.PORJUGADOR,-100));
         mazo.add(new Sorpresa("El resto de jugadores te indemniza para comprar tu silencio.",TipoSorpresa.PORJUGADOR,100));
         
-        //mazo.add(new Sorpresa("Enhorabuena, al fin has conseguido convertirte en especulador.",TipoSorpresa.CONVERTIRME,3000));
+        mazo.add(new Sorpresa("Enhorabuena, al fin has conseguido convertirte en especulador.",TipoSorpresa.CONVERTIRME,3000));
         mazo.add(new Sorpresa("La fortuna te sonríe. Únete a los especuladores.",TipoSorpresa.CONVERTIRME,5000));
-        //Collections.shuffle(mazo);
+        Collections.shuffle(mazo);
     }
     
     private void inicializarJugadores(ArrayList<String> nombres){
