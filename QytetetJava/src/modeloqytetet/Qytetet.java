@@ -22,7 +22,7 @@ public class Qytetet {
     private ArrayList<Jugador> jugadores;
     private Jugador jugadorActual;
     private Tablero tablero;
-    private Dado dado;
+    private GUIQytetet.Dado dado;
     
     private Qytetet(){
         cartaActual = null;
@@ -30,7 +30,7 @@ public class Qytetet {
         jugadores = new ArrayList();
         jugadorActual = null;
         tablero = null;
-        dado = Dado.getInstance();
+        dado = GUIQytetet.Dado.getInstance();
     }
     
     public static Qytetet getInstance(){
@@ -159,7 +159,7 @@ public class Qytetet {
     public boolean intentarSalirCarcel(MetodoSalirCarcel metodo){
         boolean libre = false;
         if (metodo == MetodoSalirCarcel.TIRANDODADO){
-            int valorDado = dado.tirar();
+            int valorDado = dado.nextNumber();
             libre = valorDado>5;
         }else{
             boolean tengoSaldo = jugadorActual.pagarLibertad(Qytetet.PRECIO_LIBERTAD);
@@ -171,7 +171,7 @@ public class Qytetet {
     }
     
     public boolean jugar(){
-        int valorDado = dado.tirar();
+        int valorDado = dado.nextNumber();
         Casilla casillaPosicion = jugadorActual.getCasillaActual();
         Casilla nuevaCasilla = tablero.obtenerNuevaCasilla(casillaPosicion,valorDado);
         boolean tienePropietario = jugadorActual.actualizarPosicion(nuevaCasilla);
@@ -250,7 +250,7 @@ public class Qytetet {
         mazo.add(new Sorpresa("No cumples la normativa, así que debes pagar por cada una de tus odiosas propiedades.",TipoSorpresa.PORCASAHOTEL,-175));
         // No estoy segura de si están bien los signos, por el método aplicarSorpresa 
         mazo.add(new Sorpresa("Los demás jugadores sospechan de ti. Los sobornas para que no te delaten.",TipoSorpresa.PORJUGADOR,-100));
-        mazo.add(new Sorpresa("El resto de jugadores te indemniza para comprar tu silencio.",TipoSorpresa.PORJUGADOR,100));
+        mazo.add(new Sorpresa("El resto de jugadores te obsequia con un sobre para comprar tu silencio.",TipoSorpresa.PORJUGADOR,100));
         
         mazo.add(new Sorpresa("Enhorabuena, al fin has conseguido convertirte en especulador.",TipoSorpresa.CONVERTIRME,3000));
         mazo.add(new Sorpresa("La fortuna te sonríe. Únete a los especuladores.",TipoSorpresa.CONVERTIRME,5000));
