@@ -3,16 +3,61 @@
 module ModeloQytetet
   
   require_relative "casilla.rb"
+  require_relative "otra_casilla.rb"
+  #require_relative "especulador.rb"
   
   class Jugador
+    
     def initialize(nombre)
       @nombre = nombre
       @encarcelado = false
       @saldo = 7500
       @cartaLibertad = nil # Su tipo será SALIRCARCEL
-      @casillaActual = Casilla.newCasillaNoCalle(0,TipoCasilla::SALIDA)
+      @casillaActual = OtraCasilla.new(0,TipoCasilla::SALIDA)
       @propiedades = Array.new
+      @factorEspeculador = 1
     end
+    
+    def self.copy(j)
+      @nombre = j.getNombre
+      @encarcelado = j.getEncarcelado
+      @saldo = j.getSaldo
+      @cartaLibertad = j.getCartaLibertad
+      @casillaActual = j.getCasillaActual
+      @propiedades = j.getPropiedades
+      #self
+    end
+    
+    #Añadido para el constructor de copia
+    def getCartaLibertad
+      @cartaLibertad
+    end
+    
+    def getFactorEspeculador
+      @factorEspeculador
+    end
+    
+    protected 
+    def pagarImpuestos(cantidad)
+      modificarSaldo(-cantidad)
+    end
+    
+    public #Cambiada visibilidad
+    def convertirme(fianza)
+      e = Especulador.new(self,fianza)
+      e
+    end
+    
+    private
+    def setPropiedades (prop)
+      @propiedades = prop
+    end
+    
+    def setSaldo(saldo)
+      @saldo = saldo
+    end
+    
+    public
     
     # Añadido para el controlador, ver si está bien
     def getSaldo
@@ -61,9 +106,7 @@ module ModeloQytetet
           end
         end
       elsif (casilla.tipo == TipoCasilla::IMPUESTO)
-        coste = casilla.coste
-        modificarSaldo(-coste)
-      
+        pagarImpuestos(300)
       end
       tienePropietario
     end

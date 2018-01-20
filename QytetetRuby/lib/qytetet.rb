@@ -46,6 +46,11 @@ module ModeloQytetet
             @jugadorActual.modificarSaldo(@cartaActual.valor)
           end
         }
+      elsif (@cartaActual.tipo == TipoSorpresa::CONVERTIRME)
+        e = @jugadorActual.convertirme(@cartaActual.valor)
+        @jugadores.delete(@jugadorActual)
+        @jugadorActual = e
+        @jugadores << e
       end
         
       if (@cartaActual.tipo == TipoSorpresa::SALIRCARCEL)
@@ -76,7 +81,7 @@ module ModeloQytetet
     def edificarCasa(casilla)
       puedoEdificar = false
       if (casilla.soyEdificable)
-        sePuedeEdificar = casilla.sePuedeEdificarCasa
+        sePuedeEdificar = casilla.sePuedeEdificarCasa(@jugadorActual.getFactorEspeculador)
         if (sePuedeEdificar)
           puedoEdificar = @jugadorActual.puedoEdificarCasa(casilla)
           if(puedoEdificar)
@@ -91,7 +96,7 @@ module ModeloQytetet
     def edificarHotel(casilla)
       puedoEdificar = false
       if (casilla.soyEdificable)
-        sePuedeEdificar = casilla.sePuedeEdificarHotel
+        sePuedeEdificar = casilla.sePuedeEdificarHotel(@jugadorActual.getFactorEspeculador)
         if (sePuedeEdificar)
           puedoEdificar = @jugadorActual.puedoEdificarHotel(casilla)
           if(puedoEdificar)
@@ -236,7 +241,11 @@ module ModeloQytetet
       @mazo << Sorpresa.new("No cumples la normativa, así que debes pagar por cada una de tus odiosas propiedades.",TipoSorpresa::PORCASAHOTEL,-175)
         
       @mazo << Sorpresa.new("Los demás jugadores sospechan de ti. Los sobornas para que no te delaten.",TipoSorpresa::PORJUGADOR,-100)
-      @mazo << Sorpresa.new("El resto de jugadores te indemniza para comprar tu silencio.",TipoSorpresa::PORJUGADOR,100)
+      @mazo << Sorpresa.new("El resto de jugadores te obsequia con un sobre para comprar tu silencio.",TipoSorpresa::PORJUGADOR,100)
+      
+      @mazo << Sorpresa.new("Enhorabuena, al fin has conseguido convertirte en especulador.",TipoSorpresa::CONVERTIRME,3000)
+      @mazo << Sorpresa.new("La fortuna te sonríe. Únete a los especuladores.",TipoSorpresa::CONVERTIRME,5000)
+        
       @mazo.shuffle!
     end
     
