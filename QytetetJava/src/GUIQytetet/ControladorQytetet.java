@@ -31,13 +31,18 @@ public class ControladorQytetet extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        vistaQytetet1 = new GUIQytetet.VistaQytetet();
         SalirCarcelDado = new javax.swing.JButton();
         SalirCarcelPagando = new javax.swing.JButton();
         Jugar = new javax.swing.JButton();
         AplicarSorpresa = new javax.swing.JButton();
         SiguienteTurno = new javax.swing.JButton();
         ComprarPropiedad = new javax.swing.JButton();
+        vistaQytetet1 = new GUIQytetet.VistaQytetet();
+        EdificarCasa = new javax.swing.JButton();
+        EdificarHotel = new javax.swing.JButton();
+        VenderPropiedad = new javax.swing.JButton();
+        HipotecarPropiedad = new javax.swing.JButton();
+        CancelarHipoteca = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -56,59 +61,137 @@ public class ControladorQytetet extends javax.swing.JFrame {
         });
 
         Jugar.setText("Jugar");
+        Jugar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JugarActionPerformed(evt);
+            }
+        });
 
         AplicarSorpresa.setText("Aplicar Sorpresa");
+        AplicarSorpresa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AplicarSorpresaActionPerformed(evt);
+            }
+        });
 
         SiguienteTurno.setText("Siguiente turno");
+        SiguienteTurno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SiguienteTurnoActionPerformed(evt);
+            }
+        });
 
         ComprarPropiedad.setText("Comprar propiedad");
+        ComprarPropiedad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ComprarPropiedadActionPerformed(evt);
+            }
+        });
+
+        EdificarCasa.setText("Edificar Casa");
+        EdificarCasa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EdificarCasaActionPerformed(evt);
+            }
+        });
+
+        EdificarHotel.setText("Edificar Hotel");
+        EdificarHotel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EdificarHotelActionPerformed(evt);
+            }
+        });
+
+        VenderPropiedad.setText("Vender Propiedad");
+        VenderPropiedad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VenderPropiedadActionPerformed(evt);
+            }
+        });
+
+        HipotecarPropiedad.setText("Hipotecar Propiedad");
+        HipotecarPropiedad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HipotecarPropiedadActionPerformed(evt);
+            }
+        });
+
+        CancelarHipoteca.setText("Cancelar Hipoteca");
+        CancelarHipoteca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CancelarHipotecaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(vistaQytetet1, javax.swing.GroupLayout.PREFERRED_SIZE, 505, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(48, 48, 48)
-                        .addComponent(SalirCarcelDado))
+                        .addComponent(vistaQytetet1, javax.swing.GroupLayout.PREFERRED_SIZE, 1125, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addComponent(SalirCarcelPagando)))
-                .addGap(46, 46, 46)
-                .addComponent(Jugar)
-                .addGap(58, 58, 58)
-                .addComponent(ComprarPropiedad)
-                .addGap(27, 27, 27)
-                .addComponent(AplicarSorpresa)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                .addComponent(SiguienteTurno)
-                .addGap(24, 24, 24))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(48, 48, 48)
+                                .addComponent(SalirCarcelDado)
+                                .addGap(161, 161, 161)
+                                .addComponent(ComprarPropiedad)
+                                .addGap(77, 77, 77)
+                                .addComponent(SiguienteTurno))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(217, 217, 217)
+                                .addComponent(Jugar)
+                                .addGap(176, 176, 176)
+                                .addComponent(AplicarSorpresa))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(37, 37, 37)
+                                .addComponent(SalirCarcelPagando)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(103, 103, 103)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(CancelarHipoteca)
+                                    .addComponent(HipotecarPropiedad)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(115, 115, 115)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(EdificarCasa)
+                                    .addComponent(EdificarHotel)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(788, 788, 788)
+                        .addComponent(VenderPropiedad)))
+                .addGap(1906, 2042, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(vistaQytetet1, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(vistaQytetet1, javax.swing.GroupLayout.PREFERRED_SIZE, 461, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
+                .addComponent(EdificarCasa)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(SalirCarcelDado)
+                    .addComponent(ComprarPropiedad)
+                    .addComponent(SiguienteTurno)
+                    .addComponent(EdificarHotel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addComponent(VenderPropiedad)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(SalirCarcelDado)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
-                        .addComponent(SalirCarcelPagando))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(Jugar)
-                            .addComponent(ComprarPropiedad)
-                            .addComponent(AplicarSorpresa)
-                            .addComponent(SiguienteTurno))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                            .addComponent(AplicarSorpresa))
+                        .addGap(33, 33, 33)
+                        .addComponent(SalirCarcelPagando))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(HipotecarPropiedad)
+                        .addGap(18, 18, 18)
+                        .addComponent(CancelarHipoteca)
+                        .addGap(7, 7, 7))))
         );
 
         pack();
@@ -142,6 +225,100 @@ public class ControladorQytetet extends javax.swing.JFrame {
         this.vistaQytetet1.actualizar(modeloQytetet);
     }//GEN-LAST:event_SalirCarcelPagandoActionPerformed
 
+    private void JugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JugarActionPerformed
+        boolean bancarrota = modeloQytetet.getJugadorActual().getSaldo() <= 0;
+        boolean tienePropietario;
+        
+        if (!bancarrota){
+            tienePropietario = modeloQytetet.jugar(); 
+            this.vistaQytetet1.actualizar(modeloQytetet);
+            eleccionSegunCasilla(modeloQytetet.getJugadorActual().getCasillaActual().getTipo(),tienePropietario);
+        }
+            
+        if (!bancarrota){
+            this.SiguienteTurno.setEnabled(true);
+            bancarrota = finJuego();
+        }else
+            bancarrota = finJuego();
+        
+        this.vistaQytetet1.actualizar(modeloQytetet);
+    }//GEN-LAST:event_JugarActionPerformed
+
+    private void SiguienteTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SiguienteTurnoActionPerformed
+        modeloQytetet.siguienteJugador();
+        this.SiguienteTurno.setEnabled(false);
+        this.vistaQytetet1.actualizar(modeloQytetet);
+    }//GEN-LAST:event_SiguienteTurnoActionPerformed
+
+    private void ComprarPropiedadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComprarPropiedadActionPerformed
+        if(modeloQytetet.comprarTituloPropiedad()){
+            JOptionPane.showMessageDialog(this,"Se ha realizado la compra");
+        }else
+            JOptionPane.showMessageDialog(this,"No se ha podido comprar");
+        
+        this.ComprarPropiedad.setEnabled(false);
+        gestionInmobiliaria();
+        this.vistaQytetet1.actualizar(modeloQytetet);
+    }//GEN-LAST:event_ComprarPropiedadActionPerformed
+
+    private void AplicarSorpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AplicarSorpresaActionPerformed
+        boolean tienePropietario = modeloQytetet.aplicarSorpresa();
+        JOptionPane.showMessageDialog(this,"Se coge una carta sorpresa");
+        if (modeloQytetet.getJugadorActual().getSaldo()>0 && !modeloQytetet.getJugadorActual().getEncarcelado() && modeloQytetet.getJugadorActual().getCasillaActual().getTipo() == modeloqytetet.TipoCasilla.CALLE){
+            if(!tienePropietario){
+                this.ComprarPropiedad.setEnabled(true);  
+            }
+        }
+        this.AplicarSorpresa.setEnabled(false);
+        gestionInmobiliaria();
+        this.vistaQytetet1.actualizar(modeloQytetet);
+    }//GEN-LAST:event_AplicarSorpresaActionPerformed
+
+    private void EdificarCasaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EdificarCasaActionPerformed
+        modeloqytetet.Calle c = (modeloqytetet.Calle) eleccionPropiedad(false);
+        if(modeloQytetet.edificarCasa(c))
+            JOptionPane.showMessageDialog(this,"Se ha edificado la casa");
+        else
+            JOptionPane.showMessageDialog(this,"No se ha podido edificar la casa");
+        this.vistaQytetet1.actualizar(modeloQytetet);
+    }//GEN-LAST:event_EdificarCasaActionPerformed
+
+    private void EdificarHotelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EdificarHotelActionPerformed
+        modeloqytetet.Calle c = (modeloqytetet.Calle) eleccionPropiedad(false);
+        if(modeloQytetet.edificarHotel(c))
+            JOptionPane.showMessageDialog(this,"Se ha edificado el hotel");
+        else
+            JOptionPane.showMessageDialog(this,"No se ha podido edificar el hotel");
+        this.vistaQytetet1.actualizar(modeloQytetet);
+    }//GEN-LAST:event_EdificarHotelActionPerformed
+
+    private void VenderPropiedadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VenderPropiedadActionPerformed
+        modeloqytetet.Calle c = (modeloqytetet.Calle) eleccionPropiedad(false);
+        if(modeloQytetet.venderPropiedad(c))
+            JOptionPane.showMessageDialog(this,"Se ha vendido la propiedad elegida");
+        else
+            JOptionPane.showMessageDialog(this,"No se ha podido vender la propiedad");
+        this.vistaQytetet1.actualizar(modeloQytetet);
+    }//GEN-LAST:event_VenderPropiedadActionPerformed
+
+    private void HipotecarPropiedadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HipotecarPropiedadActionPerformed
+        modeloqytetet.Calle c = (modeloqytetet.Calle) eleccionPropiedad(false);
+        if(modeloQytetet.hipotecarPropiedad(c))
+            JOptionPane.showMessageDialog(this,"Se ha hipotecado la propiedad");
+        else
+            JOptionPane.showMessageDialog(this,"No se ha podido hipotecar la propiedad");
+        this.vistaQytetet1.actualizar(modeloQytetet);
+    }//GEN-LAST:event_HipotecarPropiedadActionPerformed
+
+    private void CancelarHipotecaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarHipotecaActionPerformed
+        modeloqytetet.Calle c = (modeloqytetet.Calle) eleccionPropiedad(false);
+        if(modeloQytetet.cancelarHipoteca(c))
+            JOptionPane.showMessageDialog(this,"Se ha cancelado la hipoteca de la propiedad");
+        else
+            JOptionPane.showMessageDialog(this,"No se ha podido cancelar la hipoteca");
+        this.vistaQytetet1.actualizar(modeloQytetet);
+    }//GEN-LAST:event_CancelarHipotecaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -161,7 +338,22 @@ public class ControladorQytetet extends javax.swing.JFrame {
         
     }
     
+    private boolean finJuego(){
+        boolean fin = false;
+        if (modeloQytetet.getJugadorActual().getSaldo()<=0){
+            JOptionPane.showMessageDialog(this, "El juego ha terminado \n El ranking es:\n" + modeloQytetet.obtenerRanking().toString());
+            fin = true;
+        }
+        return fin;
+    }
+    
     public void habilitarComenzarTurno(){
+        this.EdificarCasa.setEnabled(false);  
+        this.EdificarHotel.setEnabled(false);  
+        this.VenderPropiedad.setEnabled(false);  
+        this.HipotecarPropiedad.setEnabled(false);  
+        this.CancelarHipoteca.setEnabled(false);  
+        this.Jugar.setEnabled(false);
         this.SalirCarcelDado.setEnabled(false);
         this.SalirCarcelPagando.setEnabled(false);
         this.ComprarPropiedad.setEnabled(false);
@@ -175,6 +367,47 @@ public class ControladorQytetet extends javax.swing.JFrame {
             this.Jugar.setEnabled(true);
     }
     
+    private void eleccionSegunCasilla(modeloqytetet.TipoCasilla tipo, boolean tienePropietario){
+        
+        if (modeloQytetet.getJugadorActual().getSaldo()>0 && !modeloQytetet.getJugadorActual().getEncarcelado()){
+            if (modeloQytetet.getJugadorActual().getCasillaActual().getTipo() == modeloqytetet.TipoCasilla.CALLE){
+                if(!tienePropietario){
+                    this.ComprarPropiedad.setEnabled(true);  
+                }
+  
+            }else if (modeloQytetet.getJugadorActual().getCasillaActual().getTipo() == modeloqytetet.TipoCasilla.SORPRESA){
+                this.AplicarSorpresa.setEnabled(true);  
+            }
+        }
+        gestionInmobiliaria();
+        this.vistaQytetet1.actualizar(modeloQytetet);
+    }
+    
+    private void gestionInmobiliaria(){
+        if (!modeloQytetet.getJugadorActual().getEncarcelado() && modeloQytetet.getJugadorActual().getSaldo() > 0 && modeloQytetet.getJugadorActual().tengoPropiedades())
+        {
+            this.EdificarCasa.setEnabled(true);  
+            this.EdificarHotel.setEnabled(true);  
+            this.VenderPropiedad.setEnabled(true);  
+            this.HipotecarPropiedad.setEnabled(true);  
+            this.CancelarHipoteca.setEnabled(true);  
+            this.SiguienteTurno.setEnabled(true);  
+        }
+        this.vistaQytetet1.actualizar(modeloQytetet);
+    }
+    
+    private modeloqytetet.Casilla eleccionPropiedad(boolean opcion){
+        ArrayList<modeloqytetet.Casilla> propiedades = modeloQytetet.propiedadesHipotecadasJugador(opcion);
+        int tam = propiedades.size();
+        String calles = "";
+        for (int i = 0; i<tam; i++)
+            calles += "Propiedad " + i + ": " + propiedades.get(i).toString() + "\n";
+        int numero = Integer.parseInt(JOptionPane.showInputDialog("Introduce el número de la propiedad con la que deseas realizar la opción \n" + calles));
+        
+        modeloqytetet.Calle c = (modeloqytetet.Calle) propiedades.get(numero);
+        return c;
+    }
+    
     public void actualizar(modeloqytetet.Qytetet qytetet){
         vistaQytetet1.actualizar(qytetet);
         this.modeloQytetet = qytetet;
@@ -183,11 +416,17 @@ public class ControladorQytetet extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AplicarSorpresa;
+    private javax.swing.JButton CancelarHipoteca;
     private javax.swing.JButton ComprarPropiedad;
+    private javax.swing.JButton EdificarCasa;
+    private javax.swing.JButton EdificarHotel;
+    private javax.swing.JButton HipotecarPropiedad;
     private javax.swing.JButton Jugar;
     private javax.swing.JButton SalirCarcelDado;
     private javax.swing.JButton SalirCarcelPagando;
     private javax.swing.JButton SiguienteTurno;
+    private javax.swing.JButton VenderPropiedad;
     private GUIQytetet.VistaQytetet vistaQytetet1;
     // End of variables declaration//GEN-END:variables
+
 }

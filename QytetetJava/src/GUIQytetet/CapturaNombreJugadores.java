@@ -29,7 +29,7 @@ public class CapturaNombreJugadores extends javax.swing.JDialog {
             }
         });
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -60,7 +60,7 @@ public class CapturaNombreJugadores extends javax.swing.JDialog {
         nombreJ4.setEditable(false);
         nombreJ4.setText(" ");
 
-        jLabel1.setText("Indica el número de jugadores y pulsa enter:");
+        jLabel1.setText("Indica la cantidad de jugadores y pulsa enter:");
 
         numeroJ.setText(" ");
         numeroJ.addActionListener(new java.awt.event.ActionListener() {
@@ -81,7 +81,7 @@ public class CapturaNombreJugadores extends javax.swing.JDialog {
         labelJ4.setText("Jugador 4");
         labelJ4.setEnabled(false);
 
-        jbJugar.setText("¡ JUGAR !");
+        jbJugar.setText("JUGAR");
         jbJugar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbJugarActionPerformed(evt);
