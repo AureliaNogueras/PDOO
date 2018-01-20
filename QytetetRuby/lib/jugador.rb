@@ -4,7 +4,6 @@ module ModeloQytetet
   
   require_relative "casilla.rb"
   require_relative "otra_casilla.rb"
-  #require_relative "especulador.rb"
   
   class Jugador
     
@@ -18,14 +17,13 @@ module ModeloQytetet
       @factorEspeculador = 1
     end
     
-    def self.copy(j)
+    def copia(j)
       @nombre = j.getNombre
       @encarcelado = j.getEncarcelado
       @saldo = j.getSaldo
       @cartaLibertad = j.getCartaLibertad
       @casillaActual = j.getCasillaActual
       @propiedades = j.getPropiedades
-      #self
     end
     
     #Añadido para el constructor de copia

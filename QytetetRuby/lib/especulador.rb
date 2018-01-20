@@ -1,14 +1,13 @@
 #encoding: utf-8
 
 module ModeloQytetet
-  #require_relative "jugador.rb"
   
   class Especulador < Jugador
     
     protected
     
     def initialize(jugador,fianza)
-      super(jugador)
+      copia(jugador)
       @factorEspeculador = 2
       @fianza = fianza
     end
