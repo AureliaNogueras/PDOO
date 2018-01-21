@@ -239,6 +239,9 @@ public class ControladorQytetet extends javax.swing.JFrame {
             this.Jugar.setEnabled(false);
             if (modeloQytetet.getJugadorActual().getCasillaActual().getTipo() == modeloqytetet.TipoCasilla.IMPUESTO)
                 JOptionPane.showMessageDialog(this, "Te ha tocado pagar un impuesto");
+            else if (modeloQytetet.getJugadorActual().getCasillaActual().getTipo() == modeloqytetet.TipoCasilla.CARCEL){
+                JOptionPane.showMessageDialog(this, "Estás en la cárcel");
+            } 
              
             this.vistaQytetet1.actualizar(modeloQytetet);
             eleccionSegunCasilla(modeloQytetet.getJugadorActual().getCasillaActual().getTipo(),tienePropietario);
