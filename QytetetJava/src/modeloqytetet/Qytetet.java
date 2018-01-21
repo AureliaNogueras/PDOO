@@ -37,6 +37,11 @@ public class Qytetet {
         return instance;
     }
     
+    // Añadido para comprobar si la carta sorpresa es la de ir a la cárcel en ControladorQytetet
+    public Tablero getTablero(){
+        return tablero;
+    }
+    
     public boolean aplicarSorpresa(){
         boolean tienePropietario = false;
         if (cartaActual.getTipo() == TipoSorpresa.PAGARCOBRAR){
@@ -54,7 +59,7 @@ public class Qytetet {
         }else if (cartaActual.getTipo() == TipoSorpresa.PORJUGADOR){
             for (Jugador jugador: jugadores){
                 if (jugador != jugadorActual){
-                    jugador.modificarSaldo(cartaActual.getValor());
+                    jugador.modificarSaldo(-cartaActual.getValor());
                 }else
                     jugadorActual.modificarSaldo(cartaActual.getValor());
             }
@@ -160,7 +165,7 @@ public class Qytetet {
         boolean libre = false;
         if (metodo == MetodoSalirCarcel.TIRANDODADO){
             int valorDado = dado.nextNumber();
-            libre = valorDado>5;
+            libre = valorDado>=5;
         }else{
             boolean tengoSaldo = jugadorActual.pagarLibertad(Qytetet.PRECIO_LIBERTAD);
             libre = tengoSaldo;

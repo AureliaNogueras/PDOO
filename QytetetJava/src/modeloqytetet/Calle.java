@@ -74,11 +74,13 @@ public class Calle extends Casilla{
         return cancelarHipoteca();
     }
     
-    int getNumCasas(){
+    // Cambiada visibilidad para acceder desde ControladorQytetet
+    public int getNumCasas(){
         return numCasas;
     }
     
-    int getNumHoteles(){
+    // Cambiada visibilidad para acceder desde ControladorQytetet
+    public int getNumHoteles(){
         return numHoteles;
     }
     
@@ -142,9 +144,9 @@ public class Calle extends Casilla{
     
     @Override
     public String toString(){
-        return super.toString() + ", coste=" + Integer.toString(coste) + ", número de casas=" +
-                Integer.toString(numCasas) + ", número de hoteles=" + Integer.toString(numHoteles) 
-                + ", título de propiedad=" + titulo + "}\n";
+        return super.toString() + " Calle: \n coste=" + Integer.toString(coste) + "\n número de casas=" +
+                Integer.toString(numCasas) + "\n número de hoteles=" + Integer.toString(numHoteles) 
+                + "\n título de propiedad=" + titulo + "\n";
     }
     
 }

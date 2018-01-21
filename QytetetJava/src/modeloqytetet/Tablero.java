@@ -21,7 +21,8 @@ public class Tablero {
         return comprobacion;
     }
     
-    Casilla getCarcel(){
+    // Cambiada visibilidad para poder acceder desde ControladorQytetet y saber si la carta sorpresa es la de irACarcel
+    public Casilla getCarcel(){
         return carcel;
     }
     

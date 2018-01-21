@@ -177,11 +177,11 @@ module ModeloQytetet
     end
     
     def obtenerRanking
-      ranking = LinkedHashMap<String, Integer>().new
+      ranking = Array.new
       @jugadores.each { |jugador|
         capital = jugador.obtenerCapital
-        # Habría que añadir el nombre y el capital, pero ¿cómo?
-        ranking.put(jugador.getNombre, capital)
+        puntuacion = "#{jugador.getNombre} #{capital}"
+        ranking << puntuacion
       }
       ranking
     end

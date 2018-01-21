@@ -19,11 +19,12 @@ public class Sorpresa {
         return texto;
     }
     
-    TipoSorpresa getTipo(){
+    // Cambiada visibilidad para poder acceder desde ControladorQytetet y saber si la carta sorpresa es la de irACarcel
+    public TipoSorpresa getTipo(){
         return tipo;
     }
     
-    int getValor(){
+    public int getValor(){
         return valor;
     }
     

@@ -45,7 +45,7 @@ module InterfazTextualQytetet
           pausa
         end
             
-        if (libre)
+        if (!@jugador.getEncarcelado)
           tienePropietario = @juego.jugar
           @jugador = @juego.getJugadorActual
           @casilla = @jugador.getCasillaActual
@@ -55,7 +55,6 @@ module InterfazTextualQytetet
                 
           eleccionSegunCasilla(@casilla.tipo,tienePropietario)
           gestionInmobiliaria
-            
         end
             
         if (@jugador.getSaldo > 0)
