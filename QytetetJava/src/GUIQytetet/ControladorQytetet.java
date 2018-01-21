@@ -239,9 +239,7 @@ public class ControladorQytetet extends javax.swing.JFrame {
             this.Jugar.setEnabled(false);
             if (modeloQytetet.getJugadorActual().getCasillaActual().getTipo() == modeloqytetet.TipoCasilla.IMPUESTO)
                 JOptionPane.showMessageDialog(this, "Te ha tocado pagar un impuesto");
-            else if (modeloQytetet.getJugadorActual().getCasillaActual().getTipo() == modeloqytetet.TipoCasilla.JUEZ){
-                JOptionPane.showMessageDialog(this, "Tu juicio ha ido mal y te han mandado a prisión de nuevo\n Tu última opción es tener una carta de libertad o ser especulador y pagar una fianza");
-            }  
+             
             this.vistaQytetet1.actualizar(modeloQytetet);
             eleccionSegunCasilla(modeloQytetet.getJugadorActual().getCasillaActual().getTipo(),tienePropietario);
             bancarrota = modeloQytetet.getJugadorActual().getSaldo() <= 0;
